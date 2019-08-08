@@ -35,20 +35,20 @@
 
 function as_test_schedule_async_action() {
 
-	if ( ! is_admin() || ! isset( $_GET['astdg_generate_actions'] ) ) {
+	if ( ! is_admin() || ! isset( $_GET['as_generate_actions'] ) ) {
 		return;
 	}
 
-	$action_type  = isset( $_GET['astdg_action_type'] ) ? $_GET['astdg_action_type'] : 'async';
-	$hook         = isset( $_GET['astdg_hook'] ) ? $_GET['astdg_hook'] : sprintf( 'astdg_test_%s_action', $action_type );
-	$group        = isset( $_GET['astdg_group'] ) ? $_GET['astdg_group'] : sprintf( 'astdg_test_%s_actions', $action_type );
-	$sleep_time   = isset( $_GET['astdg_sleep_time'] ) ? (int) $_GET['astdg_sleep_time'] : 0;
-	$action_count = isset( $_GET['astdg_action_count'] ) ? (int) $_GET['astdg_action_count'] : 100;
+	$action_type  = isset( $_GET['as_action_type'] ) ? $_GET['as_action_type'] : 'async';
+	$hook         = isset( $_GET['as_hook'] ) ? $_GET['as_hook'] : sprintf( 'as_test_%s_action', $action_type );
+	$group        = isset( $_GET['as_group'] ) ? $_GET['as_group'] : sprintf( 'as_test_%s_actions', $action_type );
+	$sleep_time   = isset( $_GET['as_sleep_time'] ) ? (int) $_GET['as_sleep_time'] : 0;
+	$action_count = isset( $_GET['as_action_count'] ) ? (int) $_GET['as_action_count'] : 100;
 
-	if ( isset( $_GET['astdg_start_time'] ) ) {
-		$start_time = (int)$_GET['astdg_start_time'];
-	} elseif ( isset( $_GET['astdg_start_date'] ) ) {
-		$start_time = as_get_datetime_object( $_GET['astdg_start_date'] )->getTimestamp();
+	if ( isset( $_GET['as_start_time'] ) ) {
+		$start_time = (int)$_GET['as_start_time'];
+	} elseif ( isset( $_GET['as_start_date'] ) ) {
+		$start_time = as_get_datetime_object( $_GET['as_start_date'] )->getTimestamp();
 	} else {
 		$start_time = time();
 	}
@@ -67,11 +67,11 @@ function as_test_schedule_async_action() {
 				as_enqueue_async_action( $hook, $args, $group );
 				break;
 			case 'cron' :
-				$recurrence = isset( $_GET['astdg_recurrence'] ) ? $_GET['astdg_recurrence'] : '0 */12 * * *';
+				$recurrence = isset( $_GET['as_recurrence'] ) ? $_GET['as_recurrence'] : '0 */12 * * *';
 				as_schedule_cron_action( $start_time, $recurrence, $hook, $args, $group );
 				break;
 			case 'recurring' :
-				$recurrence = isset( $_GET['astdg_recurrence'] ) ? (int) $_GET['astdg_recurrence'] : 12 * HOUR_IN_SECONDS;
+				$recurrence = isset( $_GET['as_recurrence'] ) ? (int) $_GET['as_recurrence'] : 12 * HOUR_IN_SECONDS;
 				as_schedule_recurring_action( $start_time, $recurrence, $hook, $args, $group );
 				break;
 			case 'single' :
@@ -90,7 +90,7 @@ function as_test_action_sleep( $creation_timestamp, $sleep_time ) {
 		sleep( $sleep_time );
 	}
 }
-add_action( 'astdg_test_async_action', 'as_test_action_sleep', 10, 2 );
-add_action( 'astdg_test_cron_action', 'as_test_action_sleep', 10, 2 );
-add_action( 'astdg_test_single_action', 'as_test_action_sleep', 10, 2 );
-add_action( 'astdg_test_recurring_action', 'as_test_action_sleep', 10, 2 );
+add_action( 'as_test_async_action', 'as_test_action_sleep', 10, 2 );
+add_action( 'as_test_cron_action', 'as_test_action_sleep', 10, 2 );
+add_action( 'as_test_single_action', 'as_test_action_sleep', 10, 2 );
+add_action( 'as_test_recurring_action', 'as_test_action_sleep', 10, 2 );
