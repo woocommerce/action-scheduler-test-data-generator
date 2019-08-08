@@ -21,12 +21,14 @@ Additional parameters available:
 
 #### Examples URLs:
 
-* Create 10 Cron actions that run every 12 hours: `/wp-admin/?astdg_generate_actions=true&astdg_action_type=cron&astdg_action_count=10`
-* Create 10 Cron actions that run once every day: `/wp-admin/?astdg_generate_actions=true&astdg_action_type=cron&astdg_action_count=10&0 0 * * *`
-* Create 250 Recurring actions to recur every 12 hours: `/wp-admin/?astdg_generate_actions=true&astdg_action_type=recurring&astdg_action_count=250`
-* Create 250 Recurring actions to recur every 24 hours: `/wp-admin/?astdg_generate_actions=true&astdg_action_type=recurring&astdg_action_count=250&recurrence=86400`
-* Create 100 Single actions with hook `'my_test_action'`: `/wp-admin/?astdg_generate_actions=true&astdg_action_type=single&astdg_hook=my_test_action`
-* Create 1,000 Single actions to run 1st January 2020: `/wp-admin/?astdg_generate_actions=true&astdg_action_type=single&astdg_action_count=1000&astdg_start_time=1577836800`
+Append the following suffixes to `/wp-admin/?astdg_generate_actions=true` to create:
+
+* 1,000 Async actions: `&astdg_action_count=1000`
+* Single actions with hook `'my_test_action'`: `&astdg_action_type=single&astdg_hook=my_test_action`
+* Cron actions that run every hour: `&astdg_action_type=cron&astdg_recurrence=0+*+*+*+*`
+* Recurring actions run an hour apart: `&astdg_action_type=recurring&recurrence=3600`
+* Actions to run 1st January 2020 by time: `&astdg_start_time=1577836800`
+* Actions to run 1st January 2020 by date: `&astdg_start_date=2020-01-01+00%3A00%3A00`
 
 ## Installation
 
