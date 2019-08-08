@@ -40,11 +40,18 @@ function as_test_schedule_async_action() {
 	}
 
 	$action_type  = isset( $_GET['astdg_action_type'] ) ? $_GET['astdg_action_type'] : 'async';
-	$start_time   = isset( $_GET['astdg_start_time'] ) ? $_GET['astdg_start_time'] : time();
 	$hook         = isset( $_GET['astdg_hook'] ) ? $_GET['astdg_hook'] : sprintf( 'astdg_test_%s_action', $action_type );
 	$group        = isset( $_GET['astdg_group'] ) ? $_GET['astdg_group'] : sprintf( 'astdg_test_%s_actions', $action_type );
 	$sleep_time   = isset( $_GET['astdg_sleep_time'] ) ? (int) $_GET['astdg_sleep_time'] : 0;
 	$action_count = isset( $_GET['astdg_action_count'] ) ? (int) $_GET['astdg_action_count'] : 100;
+
+	if ( isset( $_GET['astdg_start_time'] ) ) {
+		$start_time = (int)$_GET['astdg_start_time'];
+	} elseif ( isset( $_GET['astdg_start_date'] ) ) {
+		$start_time = as_get_datetime_object( $_GET['astdg_start_date'] )->getTimestamp();
+	} else {
+		$start_time = time();
+	}
 
 	$args = array(
 		'creation_timestamp' => time(),
