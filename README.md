@@ -11,12 +11,12 @@ Additional parameters available:
 * `(string)'as_action_type'`: Type of action to create. Can be `async`, `single`, `cron` or `recurring`. Default `async`.
 * `(int)'as_start_time'`: Unix timestamp representing time to run the action, or in the case of Cron actions, time to schedule the first instance at or after. Not used for `async` actions. Default current time.
 * `(string)'as_start_date'`: MySQL formatted date/time string in UTC timezone representing the time to run the action, or in the case of Cron actions, time to schedule the first instance at or after. Not used for `async` actions. Ignored if `'as_start_time'` is used. Defaults current date/time.
-* `(string)'as_hook'`: String to use as the action's hook. Default 'as_test_{$action_type}_action'.
-* `(string)'as_group'`: Group for the actions. Default 'as_test_{$action_type}_actions'.
+* `(string)'as_hook'`: String to use as the action's hook. Default `'as_test_{$action_type}_action'`.
+* `(string)'as_group'`: Group for the actions. Default `'as_test_{$action_type}_actions'`.
 * `(int)'as_sleep_time'`: Optional amount of time to sleep when the action runs. Only works if using default hook value. Default `0`.
-* `(int)'as_action_count'`: Number of actions to create. Default 100. 
+* `(int)'as_action_count'`: Number of actions to create. Default `100`.
 * `(int)|(string)'as_recurrence'`: Recurrence for recurring and cron actions.
-	* For a recurring action, this should be an `int representing number of seconds between each recurrence. Default, every 12 hours: `43,200`.
+	* For a recurring action, this should be an `int` representing number of seconds between each recurrence. Default, every 12 hours: `43,200`.
 	* For a cron action, this should be an `string` representing the cron schedule. Default, every 12 hours: `'0 */12 * * *'`.
 
 #### Examples URLs:
